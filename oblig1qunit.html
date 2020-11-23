@@ -1,0 +1,92 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Test Suite</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.12.0.css">
+    <script src="oblig1qunit.js"></script>
+  </head>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.12.0.js"></script>
+
+
+        <script>
+
+            QUnit.test("hovedfunksjonen funker", function (assert){
+                const actual = isDateValid('22.04.1991');
+                const expected = true;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("lengden er ikke 10", function (assert){
+                const actual = isDateValid('22.4.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("det er ikke punktum i begge de rette posisjonene", function (assert){
+                const actual = isDateValid('2.2041.991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("året består ikke av fire siffer", function (assert){
+                const actual = isDateValid('22.04.991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("måned består ikke av to siffer", function (assert){
+                const actual = isDateValid('22.4.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("måned er utenfor 1-12", function (assert){
+                const actual = isDateValid('22.13.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("dag er større enn 31", function (assert){
+                const actual = isDateValid('32.04.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("dag er 31 for en måned som ikke har 31 dager", function (assert){
+                const actual = isDateValid('31.02.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("dag er 30 og måned er februar", function (assert){
+                const actual = isDateValid('30.02.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("dag er 29 og måned er februar og det ikke er skuddår", function (assert){
+                const actual = isDateValid('29.02.1991');
+                const expected = false;
+                assert.equal(actual, expected);
+                });
+
+            QUnit.test("29. februar er gyldig når det er skuddår", function (assert){
+                const actual = isDateValid('29.02.1992');
+                const expected = true;
+                assert.equal(actual, expected);
+                });
+
+            // QUnit.test("Skuddår", function (assert){
+            //     const actual = isLeapYear('2001');
+            //     const expected = false;
+            //     assert.equal(actual, expected);
+            //     });
+
+        </script>
+    </body>
+</html>
